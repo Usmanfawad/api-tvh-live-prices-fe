@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 
 
-import formValidate from '../helpers/formValidate';
+// import formValidate from '../helpers/formValidate';
 
 const useFormSubmit = (initialFormData, apiEndpoint) => {
   const [formData, setFormData] = useState(initialFormData);
@@ -20,8 +20,7 @@ const useFormSubmit = (initialFormData, apiEndpoint) => {
 
     try {
         await new Promise((resolve) => setTimeout(resolve, 2000));
-        const formValidateValue = formValidate(formData);
-        console.log(formValidateValue);
+        console.log(formData);
         const response = await axios.post(apiEndpoint, formData);
         setResponse(response.data);
       

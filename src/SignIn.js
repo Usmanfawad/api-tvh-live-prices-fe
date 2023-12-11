@@ -38,7 +38,7 @@ export default function SignIn() {
             tblCacheArticles: ''
     
         },
-        'http://127.0.0.1:8000'
+        'http://127.0.0.1:8000/'
       );
 
     return (
@@ -64,7 +64,7 @@ export default function SignIn() {
                 Customer process form
             </Typography>
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-                <Grid container spacing={2}>
+                <Grid container spacing={1}>
                     <Grid item xs={12} sm={6}>
                         <TextField
                             margin="normal"
@@ -87,6 +87,24 @@ export default function SignIn() {
                             margin="normal"
                             required
                             fullWidth
+                            id="userPassword"
+                            label="Password"
+                            name="userPassword"
+                            type="password"
+                            value={formData.tblCacheArticles}
+                            onChange={handleChange}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                    </Grid>
+                </Grid>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} sm={4}>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
                             id="customerPartNumber"
                             label="Customer Part Number"
                             name="customerPartNumber"
@@ -98,9 +116,7 @@ export default function SignIn() {
                             }}
                         />
                     </Grid>
-                </Grid>
-                <Grid container spacing={2}>
-                    <Grid item xs>
+                    <Grid item xs={12} sm={8}>
                         <TextField
                             margin="normal"
                             required
@@ -118,7 +134,7 @@ export default function SignIn() {
                     </Grid>
                 </Grid>
                 <Grid container spacing={1}>
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={12} sm={4}>
                         <TextField
                             margin="normal"
                             required
@@ -134,7 +150,7 @@ export default function SignIn() {
                             }}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={12} sm={4}>
                         <TextField
                             margin="normal"
                             required
@@ -150,7 +166,7 @@ export default function SignIn() {
                             }}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={12} sm={4}>
                         <TextField
                             margin="normal"
                             required
@@ -160,22 +176,6 @@ export default function SignIn() {
                             name="parallelConnections"
                             type="text"
                             value={formData.parallelConnections}
-                            onChange={handleChange}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={3}>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="tblCacheArticles"
-                            label="Total Amount Of Articles In Tbl Cache"
-                            name="tblCacheArticles"
-                            type="text"
-                            value={formData.tblCacheArticles}
                             onChange={handleChange}
                             InputLabelProps={{
                                 shrink: true,
