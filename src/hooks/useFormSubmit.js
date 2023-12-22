@@ -17,9 +17,7 @@ const useFormSubmit = (initialFormData, apiEndpoint) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-
     try {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
         console.log(formData);
         const response = await axios.post(apiEndpoint, formData);
         setResponse(response.data);

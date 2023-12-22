@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -13,53 +14,26 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
-// import useFormSubmit from './hooks/useFormSubmit';
-
-
-
-// TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
-const SignIn = ({ onSubmit }) => {
 
-    const [formData, setFormData] = useState({
-        customerCode: '',
-        customerPartNumber: '',
-        userText: '',
-        fallbackQuantity: '',
-        toUpdateArticles: '',
-        parallelConnections: '',
-        tblCacheArticles: '',
-        userPassword: ''
-    });
+const FormSubmission = ({ formValues, setFormValues, onSubmit }) => {
+  
+  const handleNumericInputChange = (e) => {
+    // Allow only numeric values
+    const numericValue = e.target.value.replace(/[^0-9]/g, '');
+    setFormValues({ ...formValues, [e.target.name]: numericValue });
+  };
 
-    const disableFieldCondition = false;
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-      };
-    
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onSubmit(formData);
-    };
-    // const { formData, isLoading, error, response, handleChange, handleSubmit, formSubmitted, liveData } = useFormSubmit(
-    //     {
-    //         customerCode: '',
-    //         customerPartNumber: '',
-    //         userText: '',
-    //         fallbackQuantity: '',
-    //         toUpdateArticles: '',
-    //         parallelConnections: '',
-    //         tblCacheArticles: '',
-    //         userPassword: ''
-    
-    //     },
-    //     'http://127.0.0.1:8000/'
-    //   );
+  
+  const handleChange = (e) => {
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+  };
 
-    return (
-        <ThemeProvider theme={defaultTheme}>
+  
+  return (
+    <ThemeProvider theme={defaultTheme}>
         <Container component="main" maxWidth="xl">
             <CssBaseline />
             <Box
@@ -80,7 +54,7 @@ const SignIn = ({ onSubmit }) => {
             <Typography component="h1" variant="h5">
                 Customer process form
             </Typography>
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box component="form" sx={{ mt: 1 }}>
                 <Grid container spacing={1}>
                     <Grid item xs={12} sm={6}>
                         <TextField
@@ -91,24 +65,24 @@ const SignIn = ({ onSubmit }) => {
                             label="Customer Code"
                             name="customerCode"
                             type="text"
-                            value={formData.customerCode}
+                            value={formValues.customerCode}
                             onChange={handleChange}
                             InputLabelProps={{
                                 shrink: true,
                             }}
-                            disabled={disableFieldCondition}
+                            // disabled={disableFieldCondition}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <TextField
                             margin="normal"
-                            // required
+                            required
                             fullWidth
                             id="userPassword"
                             label="Password"
                             name="userPassword"
                             type="password"
-                            value={formData.tblCacheArticles}
+                            value={formValues.userPassword}
                             onChange={handleChange}
                             InputLabelProps={{
                                 shrink: true,
@@ -125,7 +99,7 @@ const SignIn = ({ onSubmit }) => {
                             label="Customer Part Number"
                             name="customerPartNumber"
                             type="text"
-                            value={formData.customerPartNumber}
+                            value={formValues.customerPartNumber}
                             onChange={handleChange}
                             InputLabelProps={{
                                 shrink: true,
@@ -140,7 +114,7 @@ const SignIn = ({ onSubmit }) => {
                             label="Text"
                             name="userText"
                             type="text"
-                            value={formData.userText}
+                            value={formValues.userText}
                             onChange={handleChange}
                             InputLabelProps={{
                                 shrink: true,
@@ -156,9 +130,9 @@ const SignIn = ({ onSubmit }) => {
                             id="fallbackQuantity"
                             label="Fallback Quantity"
                             name="fallbackQuantity"
-                            type="text"
-                            value={formData.fallbackQuantity}
-                            onChange={handleChange}
+                            type="number"
+                            value={formValues.fallbackQuantity}
+                            onChange={handleNumericInputChange}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -172,9 +146,9 @@ const SignIn = ({ onSubmit }) => {
                             id="toUpdateArticles"
                             label="Amount of to update articles"
                             name="toUpdateArticles"
-                            type="text"
-                            value={formData.toUpdateArticles}
-                            onChange={handleChange}
+                            type="number"
+                            value={formValues.toUpdateArticles}
+                            onChange={handleNumericInputChange}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -188,9 +162,9 @@ const SignIn = ({ onSubmit }) => {
                             id="parallelConnections"
                             label="Amount Of Parallel Connections"
                             name="parallelConnections"
-                            type="text"
-                            value={formData.parallelConnections}
-                            onChange={handleChange}
+                            type="number"
+                            value={formValues.parallelConnections}
+                            onChange={handleNumericInputChange}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -199,7 +173,7 @@ const SignIn = ({ onSubmit }) => {
                 </Grid>
                 <Button
                 // disabled={isLoading}
-                type="submit"
+                type="button"
                 fullWidth
                 variant="contained"
                 sx=
@@ -207,6 +181,7 @@ const SignIn = ({ onSubmit }) => {
                         mt: 3,
                         mb: 2
                     }}
+                onClick={onSubmit}
                 >
                     Submit
                 {/* {isLoading ? <CircularProgress size={24} color="inherit" /> : 'Submit'} */}
@@ -220,10 +195,7 @@ const SignIn = ({ onSubmit }) => {
             </Box>
         </Container>
         </ThemeProvider>
-    );
-}
+  );
+};
 
-
-
-
-export default SignIn;
+export default FormSubmission;
