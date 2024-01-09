@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './NavBar';
+import Home from './Home';
 import FormSubmission from './FormSubmission';
 import LiveResults from './LiveResults';
-
+import PreProcessing from './PreProcessing';
+import PostProcessing from './PostProcessing';
 import axios from 'axios';
 
 
@@ -77,6 +81,14 @@ const App = () => {
 
   return (
     <>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+          <Route path="/preProcessing" element={<PreProcessing />} />
+          <Route path="/postProcessing" element={<PostProcessing />} />
+        </Routes>
+      </Router>
       <FormSubmission formValues={formValues} setFormValues={setFormValues} onSubmit={handleFormSubmit} />
       <LiveResults updates={updates}/>
     </>

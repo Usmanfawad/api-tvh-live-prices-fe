@@ -1,22 +1,17 @@
 import React from 'react';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
+import { useMediaQuery, useTheme } from '@mui/material';
 import { List, ListItem, Paper, Typography } from '@mui/material';
 
 
 const LiveResults = ({ updates, isLoading }) => {
-  
-  // console.log(updates);
-  
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const paperWidth = isMobile ? 400 : 600;
+
   return (
-    // <div>
-    //   <h2>Real-time Updates</h2>
-    //   <ul>
-    //     {updates.map((update, index) => (
-    //       <li key={index}>{JSON.stringify(update)}</li>
-    //     ))}
-    //   </ul>
-    // </div>
     <Container component="main" maxWidth="xl">
       <Box
             sx={{
@@ -31,10 +26,11 @@ const LiveResults = ({ updates, isLoading }) => {
             backgroundColor: '#0F1924',
             color: 'white',
             height: '300px', // Set a fixed height
-            width: '700px',
+            width: paperWidth,
+            padding: theme.spacing(2),
             overflowY: 'auto', // Enable vertical scrolling
             // overflowX: 'hidden',
-            padding: '1rem',
+            // padding: '1rem',
             borderRadius: '8px',
             marginTop: '16px',
           }}
@@ -62,6 +58,8 @@ const LiveResults = ({ updates, isLoading }) => {
             </code>
           </Typography>
         </Paper>
+      
+        
       </Box>
       
     </Container>
