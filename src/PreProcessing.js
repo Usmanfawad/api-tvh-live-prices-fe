@@ -27,9 +27,7 @@ function PreProcessing() {
   }
 
   useEffect(() => {
-    
     handlePreProcessing();
-
   });
 
   return (
