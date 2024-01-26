@@ -9,7 +9,7 @@ function useWebHook() {
           const socket = new WebSocket('ws://localhost:8000/ws');
     
           socket.onopen = () => {
-            console.log('WebSocket connection opened.');
+            console.log('------------------WebSocket connection opened------------------');
           };
           
           socket.onmessage = (event) => {
@@ -19,7 +19,7 @@ function useWebHook() {
           };
     
           socket.onclose = () => {
-            console.log('WebSocket connection closed.');
+            console.log('------------------WebSocket connection closed------------------');
           };
     
           return () => {

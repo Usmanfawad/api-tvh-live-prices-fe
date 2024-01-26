@@ -5,7 +5,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-// import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -18,7 +18,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const defaultTheme = createTheme();
 
 
-const FormSubmission = ({ formValues, setFormValues, onSubmit }) => {
+const FormSubmission = ({ formValues, setFormValues, onSubmit, isLoading }) => {
   
   const handleNumericInputChange = (e) => {
     // Allow only numeric values
@@ -172,7 +172,7 @@ const FormSubmission = ({ formValues, setFormValues, onSubmit }) => {
                     </Grid>
                 </Grid>
                 <Button
-                // disabled={isLoading}
+                disabled={isLoading}
                 type="button"
                 fullWidth
                 variant="contained"
@@ -183,8 +183,7 @@ const FormSubmission = ({ formValues, setFormValues, onSubmit }) => {
                     }}
                 onClick={onSubmit}
                 >
-                    Submit
-                {/* {isLoading ? <CircularProgress size={24} color="inherit" /> : 'Submit'} */}
+                {isLoading ? <CircularProgress size={24} color="inherit" /> : 'Submit'}
                 
                 </Button>
                 

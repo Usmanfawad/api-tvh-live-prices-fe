@@ -24,6 +24,7 @@ const App = () => {
   const [websocket, setWebsocket] = useState(null);
   const [updates, setUpdates] = useState([]);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
 
@@ -32,7 +33,8 @@ const App = () => {
         setWebsocket(socket);
 
         socket.onopen = () => {
-          console.log('WebSocket connection opened.');
+          console.log('------------------WebSocket connection opened------------------');
+          setIsLoading(true);
         };
 
         socket.onmessage = (event) => {
@@ -44,7 +46,8 @@ const App = () => {
         };
 
         socket.onclose = () => {
-          console.log('WebSocket connection closed.');
+          console.log('------------------WebSocket connection closed------------------');
+          setIsLoading(false);
           setFormSubmitted(false);
         };
         
@@ -89,7 +92,7 @@ const App = () => {
           <Route path="/postProcessing" element={<PostProcessing />} />
         </Routes>
       </Router>
-      <FormSubmission formValues={formValues} setFormValues={setFormValues} onSubmit={handleFormSubmit} />
+      <FormSubmission formValues={formValues} setFormValues={setFormValues} onSubmit={handleFormSubmit} isLoading={isLoading} />
       <LiveResults updates={updates}/>
     </>
   );
