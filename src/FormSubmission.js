@@ -12,13 +12,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import Alert from '@mui/material/Alert';
 
 
 const defaultTheme = createTheme();
 
 
-const FormSubmission = ({ formValues, setFormValues, onSubmit, isLoading }) => {
+const FormSubmission = ({ formValues, setFormValues, onSubmit, isLoading, isFormError, isApiError }) => {
   
   const handleNumericInputChange = (e) => {
     // Allow only numeric values
@@ -183,13 +183,24 @@ const FormSubmission = ({ formValues, setFormValues, onSubmit, isLoading }) => {
                     }}
                 onClick={onSubmit}
                 >
+                
                 {isLoading ? <CircularProgress size={24} color="inherit" /> : 'Submit'}
                 
                 </Button>
                 
                 {/* {error && <p>Error: {error.message}</p>}
                 {response && <p>Response: {JSON.stringify(response)}</p>} */}
-
+                {isFormError && (
+                    <Alert severity="error">
+                    Error, please fix form errors!
+                    </Alert>
+                )}
+                {isApiError && (
+                    <Alert severity="error">
+                    Server error, make sure the backend server is running!
+                    </Alert>
+                )}
+                
             </Box>
             </Box>
         </Container>

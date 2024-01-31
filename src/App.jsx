@@ -10,6 +10,7 @@ import axios from 'axios';
 
 
 
+
 const App = () => {
   const [formValues, setFormValues] = useState({
     customerCode: '',
@@ -25,6 +26,9 @@ const App = () => {
   const [updates, setUpdates] = useState([]);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isFormError, setIsFormError] = useState(false);
+  const [isApiError, setIsApiError] = useState(false);
+
 
   useEffect(() => {
 
@@ -61,9 +65,10 @@ const App = () => {
     
     e.preventDefault();
     
-    if (!formValues.customerCode || !formValues.userPassword) {
-      console.log("Error");
-      return;
+    if (!formValues.customerCode || !formValues.userPassword || !formValues.toUpdateArticles || !formValues.fallbackQuantity || !formValues.parallelConnections) {
+      console.log("Form error");
+      setIsFormError(true);
+      return;  
     }
 
 
@@ -75,8 +80,10 @@ const App = () => {
       console.log(response.data);
       setFormSubmitted(true);
     } catch (error) {
-      // Handle errors, e.g., display an error message to the user
       console.error('Error submitting form:', error);
+      setIsApiError(true);
+      // Handle errors, e.g., display an error message to the user
+      
     }
 
     
@@ -92,9 +99,10 @@ const App = () => {
           <Route path="/postProcessing" element={<PostProcessing />} />
         </Routes>
       </Router>
-      <FormSubmission formValues={formValues} setFormValues={setFormValues} onSubmit={handleFormSubmit} isLoading={isLoading} />
+      <FormSubmission formValues={formValues} setFormValues={setFormValues} onSubmit={handleFormSubmit} isLoading={isLoading} isFormError={isFormError} isApiError={isApiError}/>
       <LiveResults updates={updates}/>
     </>
+    
   );
 };
 
