@@ -21,9 +21,11 @@ const FormSubmission = ({ formValues, setFormValues, onSubmit, isLoading, isForm
     
     const [openOne, setOpenOne] = useState(true);
     const [openTwo, setOpenTwo] = useState(true);
+
     const handleCloseErrorOne = () => {
         setOpenOne(false);
     };
+    
     const handleCloseErrorTwo = () => {
         setOpenTwo(false);
     };
@@ -60,6 +62,16 @@ const FormSubmission = ({ formValues, setFormValues, onSubmit, isLoading, isForm
                 }}>
                 <LockOutlinedIcon />
             </Avatar>
+            {isFormError && openOne && (
+                    <Alert severity="error" onClose={handleCloseErrorOne}>
+                    Error, please make sure all required fields are filled
+                    </Alert>
+                )}
+            {isApiError && openTwo && (
+                <Alert severity="warning" onClose={handleCloseErrorTwo}>
+                Server error, make sure the backend server is running!
+                </Alert>
+            )}
             <Typography component="h1" variant="h5">
                 Customer process form
             </Typography>
@@ -199,16 +211,6 @@ const FormSubmission = ({ formValues, setFormValues, onSubmit, isLoading, isForm
                 
                 {/* {error && <p>Error: {error.message}</p>}
                 {response && <p>Response: {JSON.stringify(response)}</p>} */}
-                {isFormError && openOne && (
-                    <Alert severity="error" onClose={handleCloseErrorOne}>
-                    Error, please fix form errors!
-                    </Alert>
-                )}
-                {isApiError && openTwo && (
-                    <Alert severity="error" onClose={handleCloseErrorTwo}>
-                    Server error, make sure the backend server is running!
-                    </Alert>
-                )}
                 
             </Box>
             </Box>
