@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -19,7 +18,17 @@ const defaultTheme = createTheme();
 
 
 const FormSubmission = ({ formValues, setFormValues, onSubmit, isLoading, isFormError, isApiError }) => {
-  
+    
+    const [openOne, setOpenOne] = useState(true);
+    const [openTwo, setOpenTwo] = useState(true);
+    const handleCloseErrorOne = () => {
+        setOpenOne(false);
+    };
+    const handleCloseErrorTwo = () => {
+        setOpenTwo(false);
+    };
+
+
   const handleNumericInputChange = (e) => {
     // Allow only numeric values
     const numericValue = e.target.value.replace(/[^0-9]/g, '');
@@ -190,13 +199,13 @@ const FormSubmission = ({ formValues, setFormValues, onSubmit, isLoading, isForm
                 
                 {/* {error && <p>Error: {error.message}</p>}
                 {response && <p>Response: {JSON.stringify(response)}</p>} */}
-                {isFormError && (
-                    <Alert severity="error">
+                {isFormError && openOne && (
+                    <Alert severity="error" onClose={handleCloseErrorOne}>
                     Error, please fix form errors!
                     </Alert>
                 )}
-                {isApiError && (
-                    <Alert severity="error">
+                {isApiError && openTwo && (
+                    <Alert severity="error" onClose={handleCloseErrorTwo}>
                     Server error, make sure the backend server is running!
                     </Alert>
                 )}
